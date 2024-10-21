@@ -23,9 +23,17 @@ function showStockData(data) {
     const lastRefreshed = data["Meta Data"]["3. Last Refreshed"];
     const timeSeries = data["Time Series (Daily)"];
     const mostRecent = timeSeries[lastRefreshed];
+    const symbolpaper = data["Meta Data"]["2. Symbol"];
 
+
+    // Formatando nome da ação
+    let formatSymbol = symbolpaper.toUpperCase(); 
+    formatSymbol = formatSymbol.replace(/\.[A-Z]{2}$/,"");
+
+    
     const html = `
         <h2>Dados da ação</h2>
+        <p><strong>Nome da ação:</strong> ${formatSymbol}</p>
         <p><strong>Última atualização:</strong> ${lastRefreshed}</p>
         <p><strong>Preço de abertura:</strong> ${mostRecent["1. open"]}</p>
         <p><strong>Preço de fechamento:</strong> ${mostRecent["4. close"]}</p>
